@@ -1,0 +1,70 @@
+@import 'tailwindcss';
+
+@theme {
+  --color-brand: #24178a;
+  --color-navy: #140d48;
+  --color-orange: #ff8a1f;
+  --color-pink: #e8459b;
+  --color-lav: #fbf9ff;
+  --color-lav-200: #ece8ff;
+  --color-lav-100: #f3f0ff;
+  --color-muted: #5a5480;
+  --color-dash: #9c95cc;
+  --color-dash-light: #d5cff5;
+  --color-peach: #fff0de;
+  --color-peach-ink: #5a2c00;
+  --color-ok: #137a3a;
+  --color-late: #b42318;
+
+  --font-display: 'Montserrat', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  --font-sans: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+  -webkit-tap-highlight-color: transparent;
+}
+
+body {
+  background: var(--color-lav);
+  color: var(--color-navy);
+  font-family: var(--font-sans);
+}
+
+:focus-visible {
+  outline: 3px solid var(--color-brand);
+  outline-offset: 2px;
+}
+.on-dark :focus-visible {
+  outline-color: var(--color-orange);
+}
+
+/* Bottom safe area for sticky bars on notched phones */
+.pb-safe {
+  padding-bottom: max(12px, env(safe-area-inset-bottom));
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+@keyframes flash-in {
+  0% { box-shadow: 0 0 0 0 rgba(255, 138, 31, 0.9); }
+  100% { box-shadow: 0 0 0 14px rgba(255, 138, 31, 0); }
+}
+.flash {
+  animation: flash-in 1.2s ease-out 3;
+}
+
+/* Printing posters: only the chosen poster image is printed */
+@media print {
+  body * { visibility: hidden !important; }
+  #print-area, #print-area * { visibility: visible !important; }
+  #print-area { position: fixed; inset: 0; }
+  #print-area img { width: 100%; height: 100%; object-fit: contain; }
+}
